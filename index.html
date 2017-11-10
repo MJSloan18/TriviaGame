@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<html lang="en-us">
+<meta charset="UTF-8">
+
+<head>
+    <title>Trivia</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn+SC" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <h2 id="test_status"></h2>
+    <strong><div id="test"></div></strong>
+
+    <br>
+
+    <div class="jumbotron">
+        <h1>Oakland Raiders Trivia</h1>
+
+    </div>
+
+    <div id="time-remaining">
+
+        <header>Time Remaining:</header>
+    </div>
+
+    <div class="itemshead" style="margin-top:4px;">
+        <div class="items">00 : 90s</div>
+    </div>
+
+
+
+
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        var count = 90;
+        var counter;
+        counter = setInterval(function() {
+            $("#items").html(count + " seconds ");
+            count--;
+        }, 1000);
+
+        var pos = 0;
+        var test;
+        var test_status;
+        var question;
+        var choice;
+        var choices;
+        var correct = 0;
+        var incorrect;
+        var questions = [
+            ["What year did the Oakland Raiders win their first franchise superbowl?", "1977", "1981", "1984", "1961", "A"],
+            ["Which retired Oakland Raider still remains to be the only defensive player to win the Heisman?", "Rod Woodson", "Phillip Buchannon", "Jim Otto", "Charles Woodson", "D"],
+            ["Who was the coach for the Oakland Raiders that left and led the Tampa Bay Buccaneers to the 2001-2002 Superbowl?", "John Madden", "Jon Gruden", "Jack Del Rio", "Hue Jackson", "B"],
+            ["Who was the Oakland Raiders leading receiver in the 2016 season?", "Randy Moss", "Michael Crabtree", "Amari Cooper", "Clyde Walford", "C"],
+            ["Which receiver was the only wide-receiver to win the Heisman (hint: #81)?", "Jerry Rice", "Mikal Rivera", "Warren Sapp", "Tim Brown", "D"],
+
+        ];
+
+        console.log(questions);
+
+        function _(x) {
+            return document.getElementById(x);
+        }
+
+        function renderQuestion() {
+            // test = document.getElementById("test");
+
+            test = _("test");
+
+            if (pos >= questions.length) {
+                test.innerHTML = "<p>You got " + correct + " of " + questions.length + " questions correct!</p>";
+                _("test-status").innerHTML = "Trivia Completed";
+                return false;
+
+            }
+            _("test_status").innerHTML = ("Question " + (pos + 1) + " of " + questions.length + " :");
+
+            var question = questions[pos][0];
+
+            // var question = questions[pos][0];
+            console.log(question);
+
+            var choiceA = questions[pos][1];
+
+            var choiceA = questions[pos][1];
+            console.log(choiceA);
+
+            var choiceB = questions[pos][2];
+            console.log(choiceB);
+
+            var choiceC = questions[pos][3];
+            console.log(choiceC);
+
+            var choiceD = questions[pos][4];
+            console.log(choiceD);
+
+
+            // first he replaced "getElementbyId" with an underscore _
+            // then he stored  _("test") in a variable called test
+            // getElementbyId("test").innerHTML 
+
+
+            test.innerHTML = "<h3>" + question + "</h3>";
+            test.innerHTML += "<input type='radio' name='choices' value='A'> " + choiceA + "<br>";
+            test.innerHTML += "<input type='radio' name='choices' value='B'> " + choiceB + "<br>";
+            test.innerHTML += "<input type='radio' name='choices' value='C'> " + choiceC + "<br>";
+            test.innerHTML += "<input type='radio' name='choices' value='D'> " + choiceD + "<br>";
+            test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+
+
+        }
+
+        function checkAnswer() {
+            choices = document.getElementsByName("choices");
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].checked) {
+                    choice = choices[i].value;
+                }
+            }
+            if (choice === questions[pos][5]) {
+                correct++;
+            }
+            pos++;
+            renderQuestion();
+        }
+
+        window.addEventListener("load", renderQuestion, false);
+    </script>
+
+</body>
+
+</html>
+<!--counter = setInterval(stopwatch.count, 1000); setInterval “00:00”-->
