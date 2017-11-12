@@ -70,3 +70,36 @@ h2 {
     border: white 20px double;
 
 }
+
+/**Media Queries/*/
+
+@media screen and (max-width: 480px) {
+
+    #test {
+        width: 100%;
+    }
+
+    h1 {
+        width: 100%;
+    }
+
+    .jumbotron {
+        width: 100%;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    h2 {
+        width: 100%;
+    }
+
+    #time-remaining {
+        width: 100%;
+    }
+
+    .items {
+        width: 100%;
+    }
+}
